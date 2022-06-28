@@ -5,28 +5,10 @@ class RomanNumerals:
                 val = val - divisor
             return val
 
-        """
-            Ex. val = 901, 
-            if val >= 900:
-                conversion = CM
-                val = val - 900
-            returns 1, CM
-            
-        """
-        def special_cases(val, conversion, roman, special):
-            if val >= special:
-                conversion = conversion + roman
-                val = val - special
-            return val, conversion
-
         values = {
-            "M": 1000, "D":	500, "C": 100,
-            "L": 50, "X": 10, "V": 5
-        }
-
-        special_values = {
-            "M": ["CM", 900], "D":["CD", 400], "C": ["XC", 90], 
-            "L":["XL", 40], "X":["IX", 9], "V":["IV", 4]
+            "M": 1000, "CM": 900,"D": 500, "CD": 400,
+            "C": 100, "XC": 90,  "L": 50, "XL": 40,
+            "X": 10, "IX": 9, "V": 5, "IV": 4, 'I': 1
         }
 
         conversion = ''
@@ -34,9 +16,6 @@ class RomanNumerals:
         for letter, number in values.items():
             conversion = conversion + letter * (val//number)
             val = substract(val, number)
-            val, conversion = special_cases(val, conversion, special_values[letter][0], special_values[letter][1])
-            
-        conversion = conversion + 'I' * (val//1)
 
         return conversion
 
